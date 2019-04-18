@@ -1,0 +1,22 @@
+{
+  "name": "larva/laravel-vote",
+  "description": "This is a vote.",
+  "keywords": [ "laravel", "vote", "larva" ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "illuminate/support": "^5.0",
+    "illuminate/database": "^5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Larva\\Vote\\": "src"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "prefer-stable": true
+}
