@@ -82,14 +82,19 @@ class Rating extends Model
             $rating = 0;
         }
         $rating = round($rating * 10, 2);
-        if (($aggregateModel = AggregateRating::query()->where('source_id', $this->source_id)->where('source_type', $this->source_type)->first()) == null        ) {
-            $aggregateModel = new AggregateRating;
-            $aggregateModel->source_id = $this->source_id;
-            $aggregateModel->source_type = $this->source_type;
+
+        if (($aggregateRating = $this->source->aggregateRating) == null) {
+            $this->source->aggregateRating()->create([
+                'likes' => $likes,
+                'dislikes' => $dislikes,
+                'rating' => $rating,
+            ]);
+        } else {
+            $aggregateRating->update([
+                'likes' => $likes,
+                'dislikes' => $dislikes,
+                'rating' => $rating,
+            ]);
         }
-        $aggregateModel->likes = $likes;
-        $aggregateModel->dislikes = $dislikes;
-        $aggregateModel->rating = $rating;
-        $aggregateModel->save();
     }
 }
